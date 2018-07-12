@@ -2,6 +2,8 @@
 
 使用php自带的ZipArchive类进行文件或文件夹压缩,需要开启php_zip.dll扩展
 
+php_zip.dll扩展下载地址：http://pecl.php.net/package/zip/1.13.5/windows
+
 调用方法：
 	
 	//这里写你要压缩的文件夹名的绝对地址
