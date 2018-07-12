@@ -5,13 +5,9 @@
 调用方法：
 	
 	//这里写你要压缩的文件夹名的绝对地址
-
 	$dir_path = $_SERVER['DOCUMENT_ROOT'].'/img'; 
-
 	//这里写你要压缩的压缩文件名的绝对地址，不需要创建这个压缩文件，代码里面会新建
-
 	$zipName = $_SERVER['DOCUMENT_ROOT'].'/789.zip';  
-
 	zip($dir_path,$zipName);
 
 
