@@ -1,6 +1,6 @@
 # php-zip
 
-使用php自带的ZipArchive进行文件或文件夹压缩,需要开启php_zip.dll扩展
+使用php自带的ZipArchive类进行文件或文件夹压缩,需要开启php_zip.dll扩展
 
 调用方法：
 	
