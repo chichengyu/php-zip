@@ -4,7 +4,7 @@
 
 php_zip.dll扩展下载地址：http://pecl.php.net/package/zip/1.13.5/windows
 
-方法一与方法二的调用方法都是一样的,如下：
+方法一与方法二的调用方法都是一样的，如下：
 	
 	//这里写你要压缩的文件夹名的绝对地址
 	$dir_path = $_SERVER['DOCUMENT_ROOT'].'/img'; 
