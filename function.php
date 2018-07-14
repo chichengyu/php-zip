@@ -1,4 +1,5 @@
 <?php 
+/********************************************************  方法一 ******************************************************/
 /**
  * [zip description]
  * @param  [string] $dir_path [要压缩的文件夹名的绝对地址]
@@ -78,4 +79,43 @@ function restoreFileName($path,$relationArr){
     }
 }
 
+### 注意：方法二是自己写的,只能压缩二级目录[结构不乱],多级目录压缩后,目录结构会乱,并且文件中文命名可能会乱码,自己用的时候没有乱码
 
+/********************************************************  方法二 ******************************************************/
+/**
+ * [zip description]
+ * @param  [string] $dir_path 要压缩的文件夹名的绝对地址
+ * @param  [string] $zipName  要压缩的压缩文件名的绝对地址
+ * @return [type]           [description]
+ */
+function zip($dir_path, $zipName)
+{
+    $dir_path = $dir_path.'/';
+    static $zip = null;
+    if (!$zip) {
+        $zip = new ZipArchive();   
+        file_exists($zipName) && unlink($zipName);
+    }
+    if ($zip->open($zipName, ZIPARCHIVE::CREATE)!==TRUE) {   
+        exit('无法打开文件，或者文件创建失败');
+    }
+    $allFile = scandir($dir_path);
+    if ($allFile === false) {
+        return $zip;
+    }
+    static $dir = null;
+    foreach ($allFile as $k => $file) {
+        $tempPath = $dir_path.$file;
+        if ($file == '.' || $file == '..'){
+            continue;
+        } else if (is_dir($tempPath)) {
+            $zip->addEmptyDir($file);
+            $dir .= $file.'/';
+            zip($tempPath,$zipName);
+        } else {
+            $zip->addFile($tempPath,$dir.$file);
+        }
+    }
+    $zip->close();
+    $dir = null;
+}
