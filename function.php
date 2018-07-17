@@ -44,25 +44,25 @@ function modifiyFileName($path,&$relationArr){
         while (($file = readdir($dh)) !== false){
             if(in_array($file,['.','..',null])) continue; //无效文件，重来
             if(is_dir($path.'\\'.$file)){
-                $newName = md5(rand(0,99999).rand(0,99999).rand(0,99999).microtime().'dir'.$count);
-                $relationArr[$newName] = [
+                //$newName = md5(rand(0,99999).rand(0,99999).rand(0,99999).microtime().'dir'.$count);
+                $relationArr[$file] = [
                     'originName' => iconv('GBK','UTF-8',$file),
                     'is_dir' => true,
                     'children' => []
                 ];
-                rename($path.'\\'.$file, $path.'\\'.$newName);
-                modifiyFileName($path.'\\'.$newName,$relationArr[$newName]['children']);
+                rename($path.'\\'.$file, $path.'\\'.$file);
+                modifiyFileName($path.'\\'.$file,$relationArr[$file]['children']);
                 $count++;
             }
             else{
                 $extension = strchr($file,'.');
-                $newName = md5(rand(0,99999).rand(0,99999).rand(0,99999).microtime().'file'.$count);
-                $relationArr[$newName.$extension] = [
+                //$newName = md5(rand(0,99999).rand(0,99999).rand(0,99999).microtime().'file'.$count);
+                $relationArr[$file.$extension] = [
                     'originName' => iconv('GBK','UTF-8',$file),
                     'is_dir' => false,
                     'children' => []
                 ];
-                rename($path.'\\'.$file, $path.'\\'.$newName.$extension);
+                rename($path.'\\'.$file, $path.'\\'.$file.$extension);
                 $count++;
             }
         }
